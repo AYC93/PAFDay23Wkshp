@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+</head>
+<body>
+    <h1>Order ID</h1>
+    <form method="GET" th:action="@{/order/total}" th:object="${order}">
+        Order Id:<input type="text" placeholder="Please input order ID."  name="id" >
+        <button type="submit">Submit</button>
+    </form>
+    <div th:if="${order}" th:object="${order}">
+        <table>
+            <tr>
+                <td>
+                    Order Id:
+                    <span th:text="*{id}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Customer Id:
+                    <span th:text="*{custId}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Order Date:
+                    <span th:text="*{orderDate}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Discounted Price:
+                    <span th:text="*{price}"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Cost Price:
+                    <span th:text="*{costPrice}"></span>
+                </td>
+            </tr>
+    </table>
+    <div th:if="${error}">
+        <h1>Invalid ID</h1>
+    </div>
+    </div>
+</body>
+</html>
