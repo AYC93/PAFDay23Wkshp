@@ -36,12 +36,18 @@ public class OrderController {
     }
 
     @GetMapping(path="/order/total/{id}")
-    public String getOrderId(Model m, @ModelAttribute Order order, BindingResult br, @PathVariable String id){
-        order = orderRepo.orderIdDetails(Integer.parseInt(id));
+    public String getOrderId(Model m, @ModelAttribute Order order, @PathVariable String id){
+        try {
+            order = orderRepo.orderIdDetails(Integer.parseInt(id));
         
-        m.addAttribute("order", order);
-        
-        System.out.println(order.toString());
+            m.addAttribute("order", order);
+            
+            System.out.println(order.toString());
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            m.addAttribute("error", true);
+        }
+       
         return "index";
     }
 
